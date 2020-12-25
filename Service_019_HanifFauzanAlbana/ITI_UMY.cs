@@ -12,17 +12,24 @@ namespace Service_019_HanifFauzanAlbana
     public interface ITI_UMY
     {
         [OperationContract]
-        [WebGet(UriTemplate = "Mahasiswa", ResponseFormat = WebMessageFormat.Json)]
-        List<Mahasiswa> GetAllMahasiswa();
+        [WebGet(UriTemplate = "Mahasiswa", ResponseFormat = WebMessageFormat.Json)] // Untuk membuat slash, selalu relative
+        List<Mahasiswa> GetAllMahasiswa(); // Mendapatkan kumpulan mahasiswa / seluruh data mahasiswa
 
         [OperationContract]
-        [WebGet(UriTemplate = "Mahasiswa/nim-{nim}", ResponseFormat = WebMessageFormat.Json)]
-        Mahasiswa GetMahasiswaByNIM(string nim);
-
+        [WebGet(UriTemplate = "Mahasiswa/{nim}", ResponseFormat = WebMessageFormat.Json)] // untuk get
+        Mahasiswa GetMahasiswaByNIM(string nim); //mengambil data berdasarkan nim
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "Mahasiswa", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "CreateMahasiswa", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string CreateMahasiswa(Mahasiswa mhs);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", UriTemplate = "DeleteMahasiswa/{nim}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string DeleteMahasiswa(string nim);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT", UriTemplate = "UpdateMahasiswaByNIM", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string UpdateMahasiswaByNIM(Mahasiswa mhs);
 
     }
 
